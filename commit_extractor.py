@@ -34,5 +34,9 @@ for line in str_commits :
         commit["description"] += line;
 
 ############# Print
+def pretty_print(changeset, user, description):
+    print "[\033[93mCOMMIT\033[0m]  \033[93m#"+ changeset +"\t"+ user + "\033[0m";
+    print "          "+ description;
+
 for commit in commits :
-    print "[\033[94m#"+commit["changeset"] +"\033[0m]\t"+ commit["user"] +"\t"+ commit["description"];
+    pretty_print(commit["changeset"], commit["user"], commit["description"]);
