@@ -24,6 +24,10 @@ for line in str_commits :
         commit["user"] = line[13:];
     elif line.startswith("changeset:   ") :
         commit["changeset"] = line[13:].split(":")[1];
+    elif line.startswith("summary:     ") :
+        commit["description"] += line[13:];
+        commits.append(commit);
+        commit = empty.copy();
     elif line.startswith("description:") :
         description = True;
     elif description == True and line == "" :
@@ -35,8 +39,8 @@ for line in str_commits :
 
 ############# Print
 def pretty_print(changeset, user, description):
-    print "[\033[93mCOMMIT\033[0m]  \033[93m#"+ changeset +"\t"+ user + "\033[0m";
-    print "          "+ description;
+    print "[\033[93mcommit\033[0m]   \t\033[93m#"+ changeset +"\t"+ user + "\033[0m";
+    print "           \t"+ description;
 
 for commit in commits :
     pretty_print(commit["changeset"], commit["user"], commit["description"]);
